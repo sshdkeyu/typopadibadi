@@ -40,10 +40,10 @@ export const storage = {
 } as const;
 
 export const site = {
-	url: "https://wahyupratama.dev",
+	url: "https://gue.is-a.dev",
 	name: "Wahyu Pratama",
 	handle: "wahyupratamaa",
-	title: "Wahyu Pratama",
+	title: "wahyupratama",
 	role: "Lead Software Engineer | Proprietary Trader",
 	location: "Karawaci, Tangerang, Banten, Indonesia",
 	description:
