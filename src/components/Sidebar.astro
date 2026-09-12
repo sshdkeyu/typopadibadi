@@ -1,0 +1,120 @@
+---
+import { isActivePath, site } from "../data/site";
+import Logo from "./Logo.astro";
+
+interface Props {
+	pathname: string;
+}
+
+const { pathname } = Astro.props;
+const items = site.nav.map((item) => ({
+	...item,
+	active: isActivePath(item.href, pathname),
+}));
+---
+
+<aside
+	class="sticky top-0 z-30 w-[calc(100%+2rem)] -mx-4 px-4 md:mx-0 md:w-[150px] md:flex-shrink-0 md:self-start pt-8 md:pt-20 lg:pt-32 pb-3 md:pb-0 font-serif bg-white dark:bg-[#111010]"
+	transition:persist="sidebar"
+>
+	<div>
+		<div
+			class="ml-2 md:ml-[12px] mb-2 md:px-0 md:mb-8 space-y-10 flex flex-col md:flex-row items-start"
+		>
+			<Logo label={site.name} />
+		</div>
+		<nav
+			class="flex flex-row md:flex-col items-start relative overflow-scroll md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+			id="nav"
+		>
+			<div class="flex flex-row md:flex-col space-x-0 pr-10 mb-2 mt-2 md:mt-0">
+				<div class="hidden md:block">
+					<div
+						id="nav-pill-desktop"
+						class="absolute top-0 left-0 bg-neutral-100 dark:bg-neutral-800 h-[34px] rounded-md z-[-1] opacity-0"
+					>
+					</div>
+				</div>
+				<div class="block md:hidden">
+					<div
+						id="nav-pill-mobile"
+						class="absolute top-0 left-0 bg-neutral-100 dark:bg-neutral-800 h-[34px] rounded-md z-[-1] opacity-0"
+					>
+					</div>
+				</div>
+				{
+					items.map((item) => (
+						<a
+							class:list={[
+								"nav-link transition-all hover:text-neutral-800 dark:hover:text-neutral-200 py-[5px] px-[10px]",
+								item.active ? "font-bold" : "text-neutral-500",
+							]}
+							href={item.href}
+							data-active={item.active ? "true" : "false"}
+						>
+							{item.label}
+						</a>
+					))
+				}
+			</div>
+		</nav>
+	</div>
+</aside>
+
+<script>
+	function isActivePath(href: string, pathname: string) {
+		if (href === "/") return pathname === "/";
+		return pathname === href || pathname.startsWith(`${href}/`);
+	}
+
+	function placePill() {
+		const nav = document.getElementById("nav");
+		const active = document.querySelector<HTMLAnchorElement>(".nav-link[data-active='true']");
+		const desktop = document.getElementById("nav-pill-desktop");
+		const mobile = document.getElementById("nav-pill-mobile");
+		if (!nav || !active) return;
+
+		const navBox = nav.getBoundingClientRect();
+		const box = active.getBoundingClientRect();
+		const x = box.left - navBox.left;
+		const y = box.top - navBox.top;
+
+		for (const pill of [desktop, mobile]) {
+			if (!pill) continue;
+			pill.style.width = `${box.width}px`;
+			pill.style.opacity = "1";
+			pill.style.transform = `translate(${x}px, ${y}px)`;
+			pill.style.transition = "transform 180ms ease, width 180ms ease, opacity 180ms ease";
+		}
+	}
+
+	function syncNav() {
+		const pathname = location.pathname;
+		document.querySelectorAll<HTMLAnchorElement>(".nav-link").forEach((link) => {
+			const href = link.getAttribute("href") ?? "";
+			const active = isActivePath(href, pathname);
+			link.dataset.active = active ? "true" : "false";
+			link.classList.toggle("font-bold", active);
+			link.classList.toggle("text-neutral-500", !active);
+		});
+		placePill();
+	}
+
+	declare global {
+		interface Window {
+			__diriNavBound?: boolean;
+		}
+	}
+
+	if (!window.__diriNavBound) {
+		window.__diriNavBound = true;
+		document.addEventListener("astro:after-swap", () => {
+			window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+			syncNav();
+		});
+		document.addEventListener("astro:page-load", syncNav);
+		window.addEventListener("resize", placePill);
+	}
+
+	syncNav();
+</script>

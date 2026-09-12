@@ -1,17 +1,28 @@
 ---
-
+import HomeLinks from "../components/HomeLinks.astro";
+import { site } from "../data/site";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout moments>
+	<section>
+		<h1 class="font-bold text-3xl font-serif">{site.name}</h1>
+		<p class="text-neutral-500 dark:text-neutral-400 text-sm mt-1">{site.role}</p>
+		<p class="my-5 max-w-[460px] text-neutral-800 dark:text-neutral-200">
+			{site.home.intro}
+		</p>
+		<div class="flex items-start md:items-center my-8 flex-col md:flex-row">
+			<img
+				alt={site.avatar.alt}
+				src={site.avatar.src}
+				width={site.avatar.width}
+				height={site.avatar.height}
+				class="rounded-full grayscale object-cover w-[100px] h-[100px]"
+			/>
+		</div>
+		<p class="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
+			{site.home.body}
+		</p>
+		<HomeLinks links={site.homeLinks} />
+	</section>
+</Layout>

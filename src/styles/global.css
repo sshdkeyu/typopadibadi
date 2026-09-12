@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-serif: "Kaisei Tokumin", ui-serif, Georgia, "Times New Roman", serif;
+	--color-page: #111010;
+}
+
+@utility font-sm {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+html {
+	color-scheme: light;
+	overflow-x: hidden;
+}
+
+html.dark {
+	color-scheme: dark;
+}
+
+body {
+	font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+.fade {
+	mask-image: linear-gradient(to right, transparent 0%, #000 24px, #000 100%);
+}
+
+@media (min-width: 768px) {
+	.fade {
+		mask-image: none;
+	}
+}
+
+.prose .anchor {
+	@apply invisible absolute no-underline;
+	margin-left: -1em;
+	padding-right: 0.5em;
+	width: 80%;
+	max-width: 700px;
+	cursor: pointer;
+}
+
+.prose .anchor:hover {
+	@apply visible;
+}
+
+.prose .anchor:after {
+	content: "#";
+	@apply text-neutral-400 dark:text-neutral-600;
+}
+
+.prose *:hover > .anchor {
+	@apply visible;
+}
+
+.prose-quoteless blockquote p:first-of-type::before,
+.prose-quoteless blockquote p:first-of-type::after {
+	content: none;
+}
+
+.prose pre {
+	@apply border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900;
+}
+
+.prose code {
+	@apply rounded-md border border-neutral-200 bg-neutral-100 px-1 py-0.5 font-medium text-neutral-800 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200;
+}
+
+.prose pre code {
+	@apply border-0 bg-transparent p-0 font-normal;
+}

@@ -1,0 +1,45 @@
+---
+import { getStackIcon } from "../lib/stack-icons";
+
+interface Props {
+	label: string;
+	slug?: string;
+}
+
+const { label, slug } = Astro.props;
+const icon = getStackIcon(slug);
+const initials = label
+	.replace(/[^A-Za-z0-9]+/g, " ")
+	.trim()
+	.split(" ")
+	.slice(0, 2)
+	.map((part) => part[0] ?? "")
+	.join("")
+	.toUpperCase();
+---
+
+<span
+	class="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-mono"
+>
+	{
+		icon ? (
+			<svg
+				role="img"
+				viewBox="0 0 24 24"
+				class="h-3.5 w-3.5 fill-current shrink-0"
+				aria-hidden="true"
+			>
+				<title>{icon.title}</title>
+				<path d={icon.path}></path>
+			</svg>
+		) : (
+			<span
+				class="inline-flex h-3.5 w-3.5 items-center justify-center rounded-[3px] bg-neutral-300 dark:bg-neutral-700 text-[8px] font-semibold leading-none text-neutral-600 dark:text-neutral-300 shrink-0"
+				aria-hidden="true"
+			>
+				{initials}
+			</span>
+		)
+	}
+	{label}
+</span>

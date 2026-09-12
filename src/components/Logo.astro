@@ -1,0 +1,21 @@
+---
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<a aria-label={label} href="/">
+	<svg
+		class="text-black dark:text-white h-[25px] md:h-[37px]"
+		width="25"
+		height="37"
+		viewBox="0 0 232 316"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
+		<path d="M39 316V0" stroke="currentColor" stroke-width="78"></path>
+	</svg>
+</a>

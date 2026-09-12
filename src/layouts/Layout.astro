@@ -1,0 +1,75 @@
+---
+import { ClientRouter } from "astro:transitions";
+import DraggableMoments from "../components/DraggableMoments";
+import Sidebar from "../components/Sidebar.astro";
+import ThemeScript from "../components/ThemeScript.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { site } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+	moments?: boolean;
+}
+
+const { title, description = site.description, moments = false } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.name}`;
+const pathname = Astro.url.pathname;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+---
+
+<!doctype html>
+<html lang="en" class="text-black bg-white dark:text-white dark:bg-[#111010]">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:title" content={title ?? site.name} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:site_name" content={site.name} />
+		<meta property="og:locale" content="en-US" />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title ?? site.name} />
+		<meta name="twitter:description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<ThemeScript />
+		<ClientRouter />
+	</head>
+	<body
+		class:list={[
+			"antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 lg:mx-auto",
+			moments && "overflow-x-hidden",
+		]}
+	>
+		{
+			moments && (
+				<DraggableMoments client:only="react" items={site.moments.items} />
+			)
+		}
+		<ThemeToggle />
+		<Sidebar pathname={pathname} />
+		<main
+			class:list={[
+				"flex-auto min-w-0 pt-4 md:pt-20 lg:pt-32 flex flex-col px-2 md:px-0",
+				moments &&
+					"relative z-20 pointer-events-none [&_a]:pointer-events-auto [&_img]:pointer-events-auto",
+			]}
+			transition:animate="fade"
+		>
+			<slot />
+		</main>
+	</body>
+</html>
