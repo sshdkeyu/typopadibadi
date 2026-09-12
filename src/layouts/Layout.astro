@@ -24,7 +24,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=ollama" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
 		<meta name="description" content={description} />
@@ -50,7 +50,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 	</head>
 	<body
 		class:list={[
-			"antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 lg:mx-auto",
+			"antialiased w-full max-w-4xl mx-auto mb-40 flex flex-col lg:flex-row px-4",
 			moments && "overflow-x-hidden",
 		]}
 	>
@@ -63,7 +63,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 		<Sidebar pathname={pathname} />
 		<main
 			class:list={[
-				"flex-auto min-w-0 pt-4 md:pt-20 lg:pt-32 flex flex-col px-2 md:px-0",
+				"flex-auto min-w-0 pt-4 lg:pt-20 xl:pt-32 flex flex-col px-0",
 				moments &&
 					"relative z-20 pointer-events-none [&_a]:pointer-events-auto [&_img]:pointer-events-auto",
 			]}

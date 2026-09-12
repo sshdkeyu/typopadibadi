@@ -16,6 +16,8 @@
 html {
 	color-scheme: light;
 	overflow-x: hidden;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 html.dark {
@@ -31,8 +33,9 @@ body {
 	mask-image: linear-gradient(to right, transparent 0%, #000 24px, #000 100%);
 }
 
-@media (min-width: 768px) {
-	.fade {
+@media (min-width: 1024px) {
+	.fade,
+	.fade-none {
 		mask-image: none;
 	}
 }

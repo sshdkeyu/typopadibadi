@@ -11,7 +11,7 @@ type Props = {
 
 export default function DraggableMoments({ items }: Props) {
 	return (
-		<DraggableCardContainer className="pointer-events-none fixed inset-0 z-0 isolate hidden overflow-hidden md:block">
+		<DraggableCardContainer className="pointer-events-none fixed inset-0 z-0 isolate hidden overflow-hidden xl:block">
 			{items.map((item) => (
 				<div
 					key={item.title}
