@@ -44,10 +44,10 @@ export const site = {
 	name: "Wahyu Pratama",
 	handle: "wahyupratamaa",
 	title: "wahyupratama",
-	role: "Lead Software Engineer | Proprietary Trader",
+	role: "Software Engineer | Proprietary Trader",
 	location: "Karawaci, Tangerang, Banten, Indonesia",
 	description:
-		"Lead Software Engineer at Siloam Hospitals Head Office. I own agentic procurement, the LLM underneath it, and the systems that have to hold on a Monday.",
+		"Software Engineer at Siloam Hospitals Head Office. Internal systems, agentic procurement, and the LLM underneath.",
 	avatar: {
 		src: "/avatar.jpg?v=linkedin",
 		alt: "Wahyu Pratama",
@@ -60,8 +60,8 @@ export const site = {
 	] satisfies NavItem[],
 	home: {
 		intro:
-			"Hey, I'm Wahyu Pratama. Lead Software Engineer at Siloam Hospitals Head Office. I own internal systems that have to hold under real hospital load — procurement, agentic workflows, and the model layer underneath.",
-		body: "At Siloam I took over the agentic procurement system, built the LLM from scratch, and own the apps around it. The work is type safety, clean contracts, and performance you can measure. I mentor at Harisenin. After hours I trade.",
+			"Hey, I'm Wahyu. Software Engineer at Siloam Hospitals Head Office. I build internal systems — procurement, agentic workflows, and the model under them.",
+		body: "After hours I trade.",
 	},
 	homeLinks: [
 		{
@@ -76,14 +76,13 @@ export const site = {
 		},
 	] satisfies HomeLink[],
 	about: {
-		subtitle: "Lead Software Engineer | Proprietary Trader · Based in Tangerang",
+		subtitle: "Software Engineer | Proprietary Trader · Based in Tangerang",
 		paragraphs: [
-			"I'm a **Lead Software Engineer** at **Siloam Hospitals Head Office**, Engineering and Technical. I was born in **West Sulawesi** and I work out of Tangerang. I own the internals that procurement and operations actually run — not a demo, the systems people open on a Monday.",
-			"I took over the **agentic procurement** stack. I built the **LLM from scratch**, then the system apps that sit on it. The bar is senior and quiet: clean code, typed contracts, and performance you can defend in a review. If a state can mean three things, the model is not done.",
+			"Software Engineer at **Siloam Hospitals Head Office**. Born in West Sulawesi, based in Tangerang. I own **agentic procurement** and the **LLM** under it.",
+			"The work is typed contracts, clean code, and performance you can measure.",
 		],
 		afterHr: [
-			"I also **mentor at Harisenin**. Teaching uses the same standard I use at work — say the shape out loud, then make the code obey it.",
-			"A day is fixed. **08:00–17:00** WFO or WFH at Siloam. **18:00–21:00** setup and trading. **22:00–00:00** learn. Then it repeats.",
+			"**08:00–17:00** Siloam. **18:00–21:00** setup and trading. **22:00–00:00** learn.",
 		],
 		stackLabel: "Stack",
 		stackGroups: [
