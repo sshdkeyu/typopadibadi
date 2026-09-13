@@ -1,0 +1,55 @@
+---
+---
+
+<audio
+	id="diri-vibe"
+	transition:persist="vibe"
+	loop
+	preload="auto"
+	playsinline
+	class="pointer-events-none fixed h-0 w-0 opacity-0"
+>
+	<source src="/audio/vibe.m4a" type="audio/mp4" />
+</audio>
+
+<script>
+	declare global {
+		interface Window {
+			__diriVibeBound?: boolean;
+		}
+	}
+
+	function vibe() {
+		return document.querySelector<HTMLAudioElement>("#diri-vibe");
+	}
+
+	async function start() {
+		const audio = vibe();
+		if (!audio) return;
+		audio.loop = true;
+		audio.volume = 0.32;
+		try {
+			await audio.play();
+		} catch {
+			// Browsers block sound until a tap/key. No permission dialog exists for this.
+		}
+	}
+
+	if (!window.__diriVibeBound) {
+		window.__diriVibeBound = true;
+		const unlock = () => {
+			void start();
+		};
+		for (const event of ["pointerdown", "touchstart", "keydown", "click", "wheel"] as const) {
+			window.addEventListener(event, unlock, { capture: true, passive: true });
+		}
+		document.addEventListener("astro:page-load", () => {
+			void start();
+		});
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden) void start();
+		});
+	}
+
+	void start();
+</script>

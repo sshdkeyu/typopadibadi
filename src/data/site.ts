@@ -48,6 +48,12 @@ export const site = {
 	location: "Karawaci, Tangerang, Banten, Indonesia",
 	description:
 		"Software Engineer at Siloam Hospitals Head Office. Internal systems, agentic procurement, and the LLM underneath.",
+	og: {
+		image: "/og.jpg",
+		alt: "Wahyu Pratama",
+		width: 1200,
+		height: 630,
+	},
 	avatar: {
 		src: "/avatar.jpg?v=linkedin",
 		alt: "Wahyu Pratama",
